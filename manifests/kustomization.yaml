@@ -3,3 +3,4 @@ kind: Kustomization
 bases:
 - ingress-nginx
 - external-dns
+- bitnami-sealed-secrets-operator
