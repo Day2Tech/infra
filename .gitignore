@@ -1,2 +1,6 @@
-.env
-.terraform/*
+**.env
+secret.**
+
+**/terraform.tfstate
+.terraform/plugins/**/terraform-provider-*_*
+.terraform/**/lock.json
