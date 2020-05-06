@@ -5,3 +5,4 @@ bases:
 - external-dns
 - bitnami-sealed-secrets-operator
 - cert-manager
+- day2-tech-nl-redirect
