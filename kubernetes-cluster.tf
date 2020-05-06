@@ -9,7 +9,7 @@ resource "digitalocean_kubernetes_cluster" "internal" {
     name       = "internal-autoscale-pool"
     size       = "s-1vcpu-2gb"
     auto_scale = true
-    min_nodes  = 1
+    min_nodes  = 2
     max_nodes  = 4
   }
 }
