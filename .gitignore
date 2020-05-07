@@ -1,5 +1,4 @@
 **.env
-secret.**
 
 **/terraform.tfstate
 .terraform/plugins/**/terraform-provider-*_*
