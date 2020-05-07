@@ -12,16 +12,21 @@ metadata:
       if ($host = 'www.day2.tech' ) {
         rewrite ^ https://day2.nl$request_uri redirect;
       }
-      if ($host = 'testyredirect.day2.tech' ) {
-        rewrite ^ https://day2.nl$request_uri redirect;
-      }
 spec:
   tls:
   - hosts:
-    - testyredirect.day2.tech
+    - day2.tech
+    - www.day2.tech
     secretName: day2-tech-nl-redirect
   rules:
-  - host: testyredirect.day2.tech
+  - host: day2.tech
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dev-null
+          servicePort: 80
+  - host: www.day2.tech
     http:
       paths:
       - path: /
