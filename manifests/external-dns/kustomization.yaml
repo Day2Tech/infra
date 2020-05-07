@@ -3,14 +3,9 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - external-dns.yaml
+- secret.yaml
 
 namespace: external-dns-operator
 
 commonLabels:
   app: external-dns
-
-secretGenerator:
-- name: external-dns
-  envs: 
-  - secret.env
-  type: Opaque

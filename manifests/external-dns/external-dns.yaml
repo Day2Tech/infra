@@ -59,4 +59,4 @@ spec:
           valueFrom:
             secretKeyRef:
               key: CF_API_TOKEN
-              name: external-dns
+              name: external-dns-token
