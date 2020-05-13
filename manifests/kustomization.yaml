@@ -6,3 +6,4 @@ bases:
 - bitnami-sealed-secrets-operator
 - cert-manager
 - day2-tech-nl-redirect
+- day2meet-com-redirect

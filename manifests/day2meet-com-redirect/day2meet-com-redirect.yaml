@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: day2meet-com-redirect
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($host = 'day2meet.com' ) {
+        rewrite ^ https://day2.nl/day2meet/ redirect;
+      }
+      if ($host = 'www.day2meet.com' ) {
+        rewrite ^ https://day2.nl/day2meet/ redirect;
+      }
+spec:
+  tls:
+  - hosts:
+    - day2meet.com
+    - www.day2meet.com
+    secretName: day2meet-com-redirect
+  rules:
+  - host: day2meet.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dev-null
+          servicePort: 80
+  - host: www.day2meet.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dev-null
+          servicePort: 80
