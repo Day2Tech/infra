@@ -1,5 +1,5 @@
 **.env
 
 **/terraform.tfstate
-.terraform/plugins/**/terraform-provider-*_*
-.terraform/**/lock.json
+terraform.d/plugins/**/terraform-provider-*_*
+terraform.d/**/lock.json
