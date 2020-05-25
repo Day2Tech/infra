@@ -1,0 +1,5 @@
+version: 3
+projects:
+- dir: .
+  autoplan:
+    when_modified: ["manifests/**/*.yaml", "*.tf*", "manifests/**.yaml"]

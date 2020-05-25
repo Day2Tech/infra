@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlantis
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: atlantis
+        image: runatlantis/atlantis:v0.12.0
+        env:
+        - name: ATLANTIS_REPO_WHITELIST
+          value: github.com/day2tech/* 
+        ### GitHub Config ###
+        - name: ATLANTIS_GH_USER
+          value: day2bot
+        - name: ATLANTIS_GH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: atlantis-vcs
+              key: token
+        - name: ATLANTIS_GH_WEBHOOK_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: atlantis-vcs
+              key: webhook-secret
+        ### End GitHub Config ###
+        - name: DIGITALOCEAN_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: atlantis-vcs
+              key: digitalocean-token
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: atlantis-vcs
+              key: aws-access-key
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: atlantis-vcs
+              key: aws-secret-key
+        - name: ATLANTIS_PORT
+          value: "4141" # Kubernetes sets an ATLANTIS_PORT variable so we need to override.
+        ports:
+        - name: atlantis
+          containerPort: 4141
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: 100m
+          limits:
+            memory: 256Mi
+            cpu: 100m
+        livenessProbe:
+          # We only need to check every 60s since Atlantis is not a
+          # high-throughput service.
+          periodSeconds: 60
+          httpGet:
+            path: /healthz
+            port: 4141
+            scheme: HTTP
+        readinessProbe:
+          periodSeconds: 60
+          httpGet:
+            path: /healthz
+            port: 4141
+            scheme: HTTP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: atlantis
+spec:
+  type: ClusterIP
+  ports:
+  - name: atlantis
+    port: 80
+    targetPort: 4141
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: runatlantis
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  tls:
+  - hosts:
+    - runatlantis.day2.tech
+    secretName: runatlantis-day2-tech
+  rules:
+  - host: runatlantis.day2.tech
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: atlantis
+          servicePort: 4141
