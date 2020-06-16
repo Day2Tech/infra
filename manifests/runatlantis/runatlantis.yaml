@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: atlantis
-        image: runatlantis/atlantis:v0.12.0
+        image: runatlantis/atlantis:v0.13.0
         env:
         - name: ATLANTIS_REPO_WHITELIST
           value: github.com/day2tech/* 
@@ -41,6 +41,8 @@ spec:
             secretKeyRef:
               name: atlantis-vcs
               key: aws-secret-key
+        - name: ATLANTIS_REPO_CONFIG
+          value: /atlantis-repos/repos.yaml
         - name: ATLANTIS_PORT
           value: "4141" # Kubernetes sets an ATLANTIS_PORT variable so we need to override.
         ports:
@@ -67,7 +69,16 @@ spec:
             path: /healthz
             port: 4141
             scheme: HTTP
+        volumeMounts:
+        - mountPath: /atlantis-repos/
+          name: atlantis-repos
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: atlantis-repos
+        name: atlantis-repos
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

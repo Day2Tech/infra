@@ -9,3 +9,8 @@ namespace: runatlantis
 
 commonLabels:
   app: runatlantis
+
+configMapGenerator:
+  - name: atlantis-repos
+    files:
+      - repos.yaml
