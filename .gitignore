@@ -3,5 +3,6 @@ secret.env
 
 **/terraform.tfstate
 terraform.d/plugins/**/terraform-provider-*_*
+terraform.d/plugins/**/terraform-provider-kustomization
 terraform.d/**/lock.json
 .terraform/**

@@ -10,10 +10,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Get Kustomize provider
-      run: |
-        wget -q https://github.com/kbst/terraform-provider-kustomize/releases/download/v0.1.2-beta.0/terraform-provider-kustomization-linux-amd64_v0.1.2-beta.0.tgz -O /tmp/kustomize.tgz
-        tar -xvzf /tmp/kustomize.tgz -C .
+    - name: Get Terraform plugins
+      run: ./get_terraform_plugins
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
