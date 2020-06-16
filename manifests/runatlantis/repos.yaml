@@ -1,0 +1,4 @@
+repos:
+- id: github.com/Day2Tech/infra
+  allowed_overrides: [apply_requirements, workflow]
+  allow_custom_workflows: true
