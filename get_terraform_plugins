@@ -1,0 +1,9 @@
+#!/bin/sh
+set -ex
+
+# kustomize
+
+VERSION=v0.1.2-beta.0
+wget -q https://github.com/kbst/terraform-provider-kustomize/releases/download/${VERSION}/terraform-provider-kustomization-linux-amd64_${VERSION}.tgz -O- | tar -xvzf - -C .  &
+wget -q https://github.com/kbst/terraform-provider-kustomize/releases/download/${VERSION}/terraform-provider-kustomization-darwin-amd64_${VERSION}.tgz -O- | tar -xvzf - -C . &
+wait
