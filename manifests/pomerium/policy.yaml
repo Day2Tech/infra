@@ -1,0 +1,12 @@
+policy:
+  - from: https://pomerium-test-httpbin.day2.tech
+    to: https://httpbin.org
+    allowed_domains:
+    - pomerium.io
+    - day2.nl
+    - gmail.com
+    allowed_users:
+    - simone@day2.nl
+    allowed_groups:
+    
+  

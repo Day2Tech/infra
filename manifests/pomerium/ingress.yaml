@@ -1,0 +1,61 @@
+---
+# Source: pomerium/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: pomerium
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    cert-manager.io/cluster-issuer: $(CERT_MANAGER_ISSUER)
+spec:
+  tls:
+  - hosts:
+    - $(POMERIUM_AUTHENTICATE_HOST)
+    - $(POMERIUM_AUTHORIZE_HOST)
+    secretName: pomerium-tls
+  rules:
+    - host: $(POMERIUM_AUTHENTICATE_HOST)
+      http:
+        paths:
+          - paths:
+            backend:
+              serviceName: pomerium
+              servicePort: 80
+    - host: $(POMERIUM_AUTHORIZE_HOST)
+      http:
+        paths:
+          - paths:
+            backend:
+              serviceName: pomerium
+              servicePort: 80
+    - host: $(POMERIUM_FWDAUTH_HOST)
+      http:
+        paths:
+          - paths:
+            backend:
+              serviceName: pomerium
+              servicePort: 80
+---
+# Source: pomerium/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: pomerium-svcs
+  annotations:
+    cert-manager.io/cluster-issuer: $(CERT_MANAGER_ISSUER)
+    
+spec:
+  tls:
+  - hosts:
+    - pomerium-test-httpbin.day2.tech
+    secretName: pomerium-svcs-tls
+  rules:
+    - host: pomerium-test-httpbin.day2.tech
+      http:
+        paths:
+          - paths:
+            backend:
+              serviceName: pomerium
+              servicePort: 80
+---
