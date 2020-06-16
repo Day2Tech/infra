@@ -8,7 +8,6 @@ workflows:
   lfs:
     plan:
       steps:
-        - run: apk add git-lfs
         - run: git lfs install
         - run: git lfs pull
         - init
