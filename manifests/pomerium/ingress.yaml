@@ -8,6 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
     cert-manager.io/cluster-issuer: $(CERT_MANAGER_ISSUER)
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   tls:
   - hosts:
@@ -44,7 +45,7 @@ metadata:
   name: pomerium-svcs
   annotations:
     cert-manager.io/cluster-issuer: $(CERT_MANAGER_ISSUER)
-    
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   tls:
   - hosts:
