@@ -3,3 +3,8 @@ policy:
     to: https://httpbin.org
     allowed_domains:
     - day2.nl
+
+  - from: https://grafana.day2.tech
+    to: http://localhost:1
+    allowed_domains:
+    - day2.nl
