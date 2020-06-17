@@ -10,3 +10,4 @@ bases:
 - discord-day2-nl-redirect
 - pomerium
 - loki-stack
+- kube-system
