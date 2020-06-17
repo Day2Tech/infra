@@ -217,16 +217,14 @@ spec:
         kubernetes.io/os: linux
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingRequiredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                  - nginx-ingress
-              topologyKey: kubernetes.io/hostname      
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - ingress-nginx
+            topologyKey: kubernetes.io/hostname
       containers:
         - name: nginx-ingress-controller
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0
