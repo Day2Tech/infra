@@ -5,6 +5,6 @@ policy:
     - day2.nl
 
   - from: https://grafana.day2.tech
-    to: http://localhost:1
+    to: http://loki-stack-grafana.loki-stack
     allowed_domains:
     - day2.nl

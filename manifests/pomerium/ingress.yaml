@@ -50,9 +50,17 @@ spec:
   tls:
   - hosts:
     - pomerium-test-httpbin.day2.tech
+    - grafana.day2.tech
     secretName: pomerium-svcs-tls
   rules:
     - host: pomerium-test-httpbin.day2.tech
+      http:
+        paths:
+          - paths:
+            backend:
+              serviceName: pomerium
+              servicePort: 80
+    - host: grafana.day2.tech
       http:
         paths:
           - paths:

@@ -17,6 +17,8 @@ spec:
           value: "true"
         - name: INSECURE_SERVER
           value: "TRUE"
+        - name: JWT_CLAIMS_HEADERS
+          value: "email"
         - name: FORWARD_AUTH_URL
           valueFrom:
             configMapKeyRef:
