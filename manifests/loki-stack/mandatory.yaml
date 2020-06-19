@@ -1066,7 +1066,8 @@ spec:
           configMap:
             name: loki-stack-grafana
         - name: storage
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: grafana-storage
         - name: sc-datasources-volume
           emptyDir: {}
 ---
@@ -1155,5 +1156,6 @@ spec:
           secret:
             secretName: loki-stack
         - name: storage
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: loki-storage
 ---
