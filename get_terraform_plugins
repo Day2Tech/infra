@@ -3,7 +3,7 @@ set -ex
 
 # kustomize
 
-VERSION=v0.1.2-beta.0
+VERSION=v0.2.0-beta.0
 wget -q https://github.com/kbst/terraform-provider-kustomize/releases/download/${VERSION}/terraform-provider-kustomization-linux-amd64_${VERSION}.tgz -O- | tar -xvzf - -C .  &
 wget -q https://github.com/kbst/terraform-provider-kustomize/releases/download/${VERSION}/terraform-provider-kustomization-darwin-amd64_${VERSION}.tgz -O- | tar -xvzf - -C . &
 wait
