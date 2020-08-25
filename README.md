@@ -54,3 +54,7 @@ Loki + Grafana stack for collecting logs
 ### pomerium
 
 Pomerium allows internal applications authorization and authentication through Google OAuth
+
+### rancher
+
+Rancher is deployed on the cluster. Accessible at <https://rancher.day2.tech> to Day2 engineering only.
