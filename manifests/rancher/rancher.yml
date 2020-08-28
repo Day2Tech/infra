@@ -34,8 +34,6 @@ apiVersion: apps/v1
 metadata:
   name: rancher
 spec:
-  strategy:
-    type: Recreate
   template:
     spec:
       serviceAccountName: rancher
@@ -88,13 +86,6 @@ spec:
             limits:
               memory: 2048Mi
               cpu: 1000m
-          volumeMounts:
-            - name: storage
-              mountPath: "/var/lib/rancher"
-      volumes:
-        - name: storage
-          persistentVolumeClaim:
-            claimName: rancher-storage
 ---
 # Source: rancher/templates/ingress.yaml
 apiVersion: extensions/v1beta1
