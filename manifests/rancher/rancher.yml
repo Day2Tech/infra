@@ -34,8 +34,6 @@ apiVersion: apps/v1
 metadata:
   name: rancher
 spec:
-  strategy:
-    type: Recreate
   template:
     spec:
       serviceAccountName: rancher
